@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Function to translate text using Google Translate API
 export const translateText = async (text, targetLanguage) => {
-  const apiKey = 'AIzaSyBuEzarXvZEAwk5oLmjoW2gb4dmfsphSu8'; // Replace with your Google Translate API key
+const apiKey = process.env.TRANSLATE_API;
   const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
 
   try {
