@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 const SectionTitle = ({ children }) => (
   <motion.h2
-    className="text-center text-5xl font-bold mb-4 text-green-800"
+    className="text-center text-4xl sm:text-5xl font-bold mb-4 text-green-100"
     initial={{ opacity: 0, y: -20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 1, type: 'spring', stiffness: 50 }}
@@ -33,10 +33,10 @@ const Card = ({ to, icon: Icon, title, description }) => (
 
 const Home = () => {
   return (
-    <div className='flex flex-col gap-6'>
+    <div className='flex flex-col gap-6 p-4'>
       <div className="flex flex-col justify-center mx-auto mt-10">
         <SectionTitle>Beej se Fasal tak</SectionTitle>
-        <p className='text-center max-w-4xl mx-auto'>
+        <p className='text-center max-w-4xl mx-auto text-green-200'>
           Krishi Kaushal aims to bridge the gap between traditional farming practices and modern technology by providing farmers with essential knowledge, predictive tools, and disease management solutions to optimize crop yield and ensure sustainable farming practices.
         </p>
       </div>
