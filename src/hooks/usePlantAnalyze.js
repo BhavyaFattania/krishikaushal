@@ -1,28 +1,26 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { translateText } from './translateText';
 
 export const usePlantAnalyze = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
   const [responseData, setResponseData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [language, setLanguage] = useState('en'); // Default language
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setSelectedFile(file);
-
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setImagePreviewUrl(imageUrl);
+      setImagePreviewUrl(URL.createObjectURL(file));
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!selectedFile) {
-      setError('Please select an image file to upload.');
+    if (!imagePreviewUrl) {
+      setError('Please select an image.');
       return;
     }
 
@@ -31,28 +29,26 @@ export const usePlantAnalyze = () => {
     setResponseData(null);
 
     const formData = new FormData();
-    formData.append('image', selectedFile);
+    formData.append('image', document.querySelector('input[type="file"]').files[0]);
 
     try {
-      const res = await axios.post('http://localhost:5000/api/analyzeImage', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+      const response = await axios.post('http://localhost:5000/api/analyzeImage', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
       });
 
-      // Log the raw response
-      console.log('Raw API Response:', res.data);
+      // Clean the response text
+      const cleanResponseText = response.data.text
+        .replace(/^```json\s*|\s*```$/g, '') // Remove backticks and json markers
+        .trim();
 
-      const rawText = res.data.text;
-      const jsonMatch = rawText.match(/```json\n([\s\S]*?)\n```/);
+      // Parse the cleaned response text
+      const parsedResponse = JSON.parse(cleanResponseText);
 
-      if (jsonMatch) {
-        const jsonString = jsonMatch[1];
-        const parsedData = JSON.parse(jsonString);
-        setResponseData(parsedData);
-      } else {
-        setError('Could not parse the JSON response.');
-      }
+      // Translate the response text
+      const translatedResponse = await translateText(JSON.stringify(parsedResponse), language);
+      const translatedParsedResponse = JSON.parse(translatedResponse);
+
+      setResponseData(translatedParsedResponse);
     } catch (err) {
       setError('An error occurred while analyzing the image.');
       console.error(err);
@@ -68,5 +64,6 @@ export const usePlantAnalyze = () => {
     error,
     handleFileChange,
     handleSubmit,
+    setLanguage, // Expose the function to change language
   };
 };
