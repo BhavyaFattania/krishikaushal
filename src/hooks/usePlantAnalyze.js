@@ -44,11 +44,17 @@ export const usePlantAnalyze = () => {
       // Parse the cleaned response text
       const parsedResponse = JSON.parse(cleanResponseText);
 
-      // Translate the response text
-      const translatedResponse = await translateText(JSON.stringify(parsedResponse), language);
-      const translatedParsedResponse = JSON.parse(translatedResponse);
+      // Translate each field
+      const translatedCrop = await translateText(parsedResponse.crop, language);
+      const translatedDisease = await translateText(parsedResponse.disease, language);
+      const translatedTreatment = await translateText(parsedResponse.treatment, language);
 
-      setResponseData(translatedParsedResponse);
+      // Set the translated response data
+      setResponseData({
+        crop: translatedCrop,
+        disease: translatedDisease,
+        treatment: translatedTreatment,
+      });
     } catch (err) {
       setError('An error occurred while analyzing the image.');
       console.error(err);
