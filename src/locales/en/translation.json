@@ -1,0 +1,15 @@
+{
+    "title": "Plant Disease Analysis",
+    "upload_instruction": "Click or Drag to Upload Image",
+    "submit_button": "Submit",
+    "analyzing": "Analyzing...",
+    "result": "Analysis Result:",
+    "crop": "Crop:",
+    "disease": "Disease:",
+    "treatment": "Treatment:",
+    "error": "An error occurred while analyzing the image.",
+    "crop_value": "crop name",
+    "disease_value": "disease name",
+    "treatment_value": "treatment name"
+  }
+  
