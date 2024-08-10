@@ -1,14 +1,25 @@
-import './App.css';
+
 import Header from './components/Header';
 import PlantAnalyze from './pages/PlantAnalyze';
 import './i18n';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Footer from './components/Footer';
+
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <PlantAnalyze />
-    </div>
+    <BrowserRouter>
+      <div >
+        <Header />
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/PlantAnalyze" element={<PlantAnalyze />} />
+
+        </Routes>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 
