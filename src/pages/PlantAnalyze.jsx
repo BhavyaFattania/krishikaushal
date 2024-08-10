@@ -1,8 +1,10 @@
 import React from 'react';
 import { usePlantAnalyze } from '../hooks/usePlantAnalyze';
-import { FiUpload } from 'react-icons/fi'; // Importing an upload icon from react-icons
+import { useTranslation } from 'react-i18next'; // Import useTranslation hook
+import { FiUpload } from 'react-icons/fi';
 
 const PlantAnalyze = () => {
+  const { t, i18n } = useTranslation(); // Initialize useTranslation
   const {
     imagePreviewUrl,
     responseData,
@@ -10,27 +12,34 @@ const PlantAnalyze = () => {
     error,
     handleFileChange,
     handleSubmit,
+    setLanguage,
   } = usePlantAnalyze();
+
+  const changeLanguage = (event) => {
+    const selectedLanguage = event.target.value;
+    i18n.changeLanguage(selectedLanguage);
+    setLanguage(selectedLanguage); // Update language in hook
+  };
 
   return (
     <div className="max-w-xl mx-auto mt-10 p-6 border border-gray-300 rounded-lg shadow-md bg-white">
-      <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">Plant Disease Analysis</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">{t('title')}</h1>
       
-      {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
+      {error && <p className="text-red-500 mt-4 text-center">{t('error')}</p>}
       
       {responseData && (
         <div className="mt-8 bg-gray-100 p-4 rounded-md shadow-inner">
-          <h2 className="text-lg font-semibold mb-2 text-gray-700">Analysis Result:</h2>
-          <p><strong className="font-medium">Crop:</strong> {responseData.crop}</p>
-          <p><strong className="font-medium">Disease:</strong> {responseData.disease}</p>
-          <p><strong className="font-medium">Treatment:</strong> {responseData.treatment}</p>
+          <h2 className="text-lg font-semibold mb-2 text-gray-700">{t('result')}</h2>
+          <p><strong className="font-medium">{t('crop')}</strong> {responseData.crop}</p>
+          <p><strong className="font-medium">{t('disease')}</strong> {responseData.disease}</p>
+          <p><strong className="font-medium">{t('treatment')}</strong> {responseData.treatment}</p>
         </div>
       )}
       
       <form onSubmit={handleSubmit} className="flex flex-col items-center p-4">
         <label htmlFor="file-upload" className="flex flex-col items-center cursor-pointer bg-gray-200 border border-gray-300 rounded-lg p-4 hover:bg-gray-300 transition-colors duration-300">
           <FiUpload className="text-3xl text-gray-600 mb-2" />
-          <span className="text-gray-700">Click or Drag to Upload Image</span>
+          <span className="text-gray-700">{t('upload_instruction')}</span>
           <input
             id="file-upload"
             type="file"
@@ -55,9 +64,21 @@ const PlantAnalyze = () => {
           className={`mt-4 px-6 py-3 rounded-lg text-white font-semibold transition-colors duration-300 ${loading ? 'bg-gray-500' : 'bg-green-600 hover:bg-green-700'} focus:outline-none`}
           disabled={loading}
         >
-          {loading ? 'Analyzing...' : 'Submit'}
+          {loading ? t('analyzing') : t('submit_button')}
         </button>
       </form>
+      
+      <div className="mt-4 text-center">
+        <select
+          onChange={changeLanguage}
+          value={i18n.language}
+          className="px-4 py-2 bg-blue-500 text-white rounded-lg border border-blue-600 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300"
+        >
+          <option value="en">English</option>
+          <option value="hi">हिन्दी</option>
+          <option value="gu">ગુજરાતી</option>
+        </select>
+      </div>
     </div>
   );
 };
