@@ -9,13 +9,13 @@ const HandleVoiceSearch = ({ transcript }) => {
 
   const searchVoiceQuery = async () => {
     if (!transcript) return;
-  
+
     setLoading(true);
     console.log('Transmitting transcript:', transcript);
     try {
       const response = await axios.post('http://localhost:5000/api/voiceSearch', { query: transcript });
       console.log('API Response:', response.data);
-  
+
       const { text } = response.data;
 
       // Clean and parse the JSON response
@@ -41,7 +41,13 @@ const HandleVoiceSearch = ({ transcript }) => {
 
   return (
     <div>
-      {loading && <p>Loading...</p>}
+      {loading &&
+        <div className="flex flex-col items-start justify-start gap-4 my-4 p-4 border rounded-lg bg-gray-50">
+          <h3 className="text-xl font-semibold mb-2">Generating...</h3>
+          <div className="h-2 w-full bg-gradient-to-r from-green-500 via-green-300 to-green-700 mx-auto rounded-full animate-gradient-animate z-50"></div>
+          <div className="h-2 w-1/2 text-left bg-gradient-to-r from-green-500 via-green-300 to-green-700 mx-auto rounded-full animate-gradient-animate z-50"></div>
+        </div>
+      }
       {searchResults && (
         <div className="my-4 p-4 border rounded-lg bg-gray-50">
           <h3 className="text-xl font-semibold mb-2">Search Results</h3>
@@ -49,7 +55,7 @@ const HandleVoiceSearch = ({ transcript }) => {
           <div className="mt-2">
             <h4 className="text-lg font-semibold">AI Response:</h4>
             <div className="text-gray-700 whitespace-pre-wrap">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{searchResults.response}</ReactMarkdown>
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>{searchResults.response}</ReactMarkdown>
             </div>
           </div>
         </div>
