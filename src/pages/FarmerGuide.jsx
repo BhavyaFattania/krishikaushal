@@ -115,8 +115,11 @@ const FarmerGuide = () => {
   return (
     <div className="max-w-5xl mx-auto p-6 bg-white rounded-lg shadow-lg">
       <div className='flex justify-between'>
-      <h2 className="text-2xl font-bold text-gray-800 mb-6">{t('farmer_guide_title')}</h2>
-      <div >
+
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">{t('farmer_guide_title')}</h2>
+        
+
+        <div >
           <select
             onChange={changeLanguage}
             value={i18n.language}
@@ -127,7 +130,8 @@ const FarmerGuide = () => {
             <option value="gu">ગુજરાતી</option>
           </select>
         </div>
-        </div>
+      </div>
+      <p>{t('farmer_guide_desc')}</p>
       <VoiceToText onTranscript={handleTranscript} />
       <HandleVoiceSearch transcript={transcript} />
 
