@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import FAQ from '../components/FAQ';
 import VoiceToText from '../components/VoiceToText';
 import HandleVoiceSearch from '../hooks/handleVoiceSearch';
 
 const FarmerGuide = () => {
+  const { t, i18n } = useTranslation();
   const [transcript, setTranscript] = useState('');
   const [matchingFAQs, setMatchingFAQs] = useState([]);
 
@@ -14,30 +16,78 @@ const FarmerGuide = () => {
 
   const faqData = {
     'Crop Management': [
-      { question: 'How can I improve soil health?', answer: 'Implement practices like crop rotation, cover cropping, and organic matter addition. Consider soil testing to identify nutrient deficiencies.' },
-      { question: 'How do I manage pests and diseases effectively?', answer: 'Integrated Pest Management (IPM) is key. This involves a combination of cultural, biological, and chemical control methods.' },
-      { question: 'What is the best time to plant my crops?', answer: 'Consider local climate, soil conditions, and crop-specific requirements. Use agricultural calendars as a guide.' },
-      { question: 'How can I increase crop yield?', answer: 'Improve soil fertility, use high-quality seeds, optimize planting density, and employ proper irrigation and weed control.' }
+      {
+        question: t('faq_crop_management_question_1'),
+        answer: t('faq_crop_management_answer_1')
+      },
+      {
+        question: t('faq_crop_management_question_2'),
+        answer: t('faq_crop_management_answer_2')
+      },
+      {
+        question: t('faq_crop_management_question_3'),
+        answer: t('faq_crop_management_answer_3')
+      },
+      {
+        question: t('faq_crop_management_question_4'),
+        answer: t('faq_crop_management_answer_4')
+      }
     ],
     'Financial Management': [
-      { question: 'How can I reduce production costs?', answer: 'Explore cost-effective inputs, improve efficiency, and adopt labor-saving technologies.' },
-      { question: 'What are the best crop insurance options?', answer: 'Research different insurance plans based on your crop type, region, and risk tolerance.' },
-      { question: 'How can I access agricultural loans?', answer: 'Explore government schemes, cooperative banks, and commercial banks. Prepare a detailed business plan.' }
+      {
+        question: t('faq_financial_management_question_1'),
+        answer: t('faq_financial_management_answer_1')
+      },
+      {
+        question: t('faq_financial_management_question_2'),
+        answer: t('faq_financial_management_answer_2')
+      },
+      {
+        question: t('faq_financial_management_question_3'),
+        answer: t('faq_financial_management_answer_3')
+      }
     ],
     'Market and Policy': [
-      { question: 'How can I find profitable markets for my produce?', answer: 'Explore direct-to-consumer channels, farmer\'s markets, and cooperatives. Build relationships with buyers.' },
-      { question: 'What government schemes are available for farmers?', answer: 'Research and understand government programs like subsidies, crop insurance, and credit facilities.' },
-      { question: 'How can I cope with fluctuating prices?', answer: 'Diversify crops, consider forward contracts, and explore price risk management tools.' }
+      {
+        question: t('faq_market_policy_question_1'),
+        answer: t('faq_market_policy_answer_1')
+      },
+      {
+        question: t('faq_market_policy_question_2'),
+        answer: t('faq_market_policy_answer_2')
+      },
+      {
+        question: t('faq_market_policy_question_3'),
+        answer: t('faq_market_policy_answer_3')
+      }
     ],
     'Technology and Innovation': [
-      { question: 'How can I use technology to improve farming?', answer: 'Explore options like precision agriculture, farm management software, and weather apps.' },
-      { question: 'What are the benefits of organic farming?', answer: 'Understand the principles of organic farming, including soil health, biodiversity, and animal welfare.' },
-      { question: 'How can I adopt sustainable farming practices?', answer: 'Focus on water conservation, reducing chemical inputs, and protecting the environment.' }
+      {
+        question: t('faq_technology_innovation_question_1'),
+        answer: t('faq_technology_innovation_answer_1')
+      },
+      {
+        question: t('faq_technology_innovation_question_2'),
+        answer: t('faq_technology_innovation_answer_2')
+      },
+      {
+        question: t('faq_technology_innovation_question_3'),
+        answer: t('faq_technology_innovation_answer_3')
+      }
     ],
     'Other Common Concerns': [
-      { question: 'How can I manage water scarcity?', answer: 'Implement water-saving techniques like drip irrigation, rainwater harvesting, and efficient water management.' },
-      { question: 'How can I improve livestock health?', answer: 'Provide proper nutrition, vaccination, and hygiene. Consult with a veterinarian.' },
-      { question: 'What are the challenges of climate change for farmers?', answer: 'Understand the impacts of climate change on your region and adopt climate-resilient practices.' }
+      {
+        question: t('faq_other_concerns_question_1'),
+        answer: t('faq_other_concerns_answer_1')
+      },
+      {
+        question: t('faq_other_concerns_question_2'),
+        answer: t('faq_other_concerns_answer_2')
+      },
+      {
+        question: t('faq_other_concerns_question_3'),
+        answer: t('faq_other_concerns_answer_3')
+      }
     ]
   };
 
@@ -57,22 +107,40 @@ const FarmerGuide = () => {
     setMatchingFAQs(matches);
   };
 
+  const changeLanguage = (event) => {
+    const selectedLanguage = event.target.value;
+    i18n.changeLanguage(selectedLanguage); // Change language dynamically
+  };
+
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6">Farmer's Guide: Frequently Asked Questions</h2>
+    <div className="max-w-5xl mx-auto p-6 bg-white rounded-lg shadow-lg">
+      <div className='flex justify-between'>
+      <h2 className="text-2xl font-bold text-gray-800 mb-6">{t('farmer_guide_title')}</h2>
+      <div >
+          <select
+            onChange={changeLanguage}
+            value={i18n.language}
+            className="px-4 py-2 bg-blue-500 text-white rounded-lg border border-blue-600 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300"
+          >
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+            <option value="gu">ગુજરાતી</option>
+          </select>
+        </div>
+        </div>
       <VoiceToText onTranscript={handleTranscript} />
       <HandleVoiceSearch transcript={transcript} />
-      
+
       {transcript && (
         <div className="my-4 p-4 border rounded-lg bg-gray-50">
-          <h3 className="text-xl font-semibold mb-2">Transcribed Text</h3>
+          <h3 className="text-xl font-semibold mb-2">{t('transcribed_text')}</h3>
           <p className="text-gray-700">{transcript}</p>
         </div>
       )}
 
       {matchingFAQs.length > 0 && (
         <div className="my-4 p-4 border rounded-lg bg-gray-50">
-          <h3 className="text-xl font-semibold mb-2">Matching FAQs</h3>
+          <h3 className="text-xl font-semibold mb-2">{t('matching_faqs')}</h3>
           {matchingFAQs.map((item, index) => (
             <FAQ key={index} question={item.question} answer={item.answer} />
           ))}
@@ -81,7 +149,7 @@ const FarmerGuide = () => {
 
       {Object.entries(faqData).map(([sectionTitle, faqs]) => (
         <div key={sectionTitle} className="mb-8">
-          <h3 className="text-2xl font-bold text-gray-800 mb-4">{sectionTitle}</h3>
+          <h3 className="text-2xl font-bold text-gray-800 mb-4">{t(sectionTitle)}</h3>
           {faqs.map((item, index) => (
             <FAQ key={index} question={item.question} answer={item.answer} />
           ))}
