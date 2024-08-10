@@ -9,7 +9,7 @@ import FarmerGuide from './pages/FarmerGuide';
 function App() {
   return (
     <BrowserRouter>
-      <div>
+      <div className='bg-green-600'>
         <Header />
         <Routes>
           <Route index element={<Home />} />
