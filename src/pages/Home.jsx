@@ -16,7 +16,7 @@ const Home = () => {
                     <p className='text-center max-w-4xl'>Krishi Kaushal aims to bridge the gap between traditional farming practices and modern technology by providing farmers with essential knowledge, predictive tools, and disease management solutions to optimize crop yield and ensure sustainable farming practices.</p>
                 </div>
                 <div className="text-2xl font-semibold grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-8 m-6">
-                    <Link to={"/"}>
+                    <Link to={"/FarmerGuide"}>
                         <div className="max-w-sm bg-white shadow-md rounded-lg p-6 border-2 border-green-600">
                             <FaMapSigns />
                             <p>Farmer Guide</p>
