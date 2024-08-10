@@ -41,17 +41,18 @@ const PlantAnalyze = () => {
             </div>
             <div className='flex justify-center m-2'>
                 {error && <p className="text-red-500 mt-4 text-center">{t('error')}</p>}
-
+                {loading && <p className="text-green-600 mt-4 text-center text-xl font-semibold ">{t('Analyzing Image...')}</p>
+                }
                 {responseData && (
                     <div className="mt-8 bg-gray-100 p-4 rounded-md shadow-inner text-start">
-                        <h2 className="text-lg font-semibold mb-2 text-gray-700">{t('result')}</h2>
+                        <h2 className="text-lg font-semibold mb-2 text-green-700">{t('result')}</h2>
                         <p><strong className="font-medium">{t('crop')}</strong> {responseData.crop}</p>
                         <p><strong className="font-medium">{t('disease')}</strong> {responseData.disease}</p>
                         <p><strong className="font-medium">{t('treatment')}</strong> {responseData.treatment}</p>
                     </div>
                 )}
             </div>
-            <div className='flex flex-col sm:flex-row m-4'>
+            <div className='flex flex-col lg:flex-row m-4'>
 
                 <div className="max-w-xl w-full mx-auto mt-10 p-6 border-2 border-green-600  rounded-lg shadow-md bg-white">
 
