@@ -1,10 +1,10 @@
 import React from 'react';
 import { usePlantAnalyze } from '../hooks/usePlantAnalyze';
-import { useTranslation } from 'react-i18next'; // Import useTranslation hook
+import { useTranslation } from 'react-i18next';
 import { FiUpload } from 'react-icons/fi';
 
 const PlantAnalyze = () => {
-  const { t, i18n } = useTranslation(); // Initialize useTranslation
+  const { t, i18n } = useTranslation(); 
   const {
     imagePreviewUrl,
     responseData,
