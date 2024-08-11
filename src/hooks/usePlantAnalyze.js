@@ -29,7 +29,7 @@ export const usePlantAnalyze = () => {
     formData.append('image', document.querySelector('input[type="file"]').files[0]);
 
     try {
-      const response = await fetch('http://host1.thunderdevelops.in:25570/api/analyzeImage', {
+      const response = await fetch('http://localhost:5000/api/analyzeImage', {
         method: 'POST',
         body: formData,
       });

@@ -13,7 +13,7 @@ const HandleVoiceSearch = ({ transcript }) => {
     setLoading(true);
     console.log('Transmitting transcript:', transcript);
     try {
-      const response = await axios.post('http://host1.thunderdevelops.in:25570/api/voiceSearch', { query: transcript });
+      const response = await axios.post('http://localhost:5000/api/voiceSearch', { query: transcript });
       console.log('API Response:', response.data);
 
       const { text } = response.data;

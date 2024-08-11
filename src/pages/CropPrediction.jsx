@@ -26,7 +26,7 @@ const CropPrediction = () => {
         };
 
         try {
-            const URL = 'http://host1.thunderdevelops.in:25570/api/predictCrop';
+            const URL = 'http://localhost:5000/api/predictCrop';
             const response = await fetch(URL, {
                 method: 'POST',
                 headers: {
