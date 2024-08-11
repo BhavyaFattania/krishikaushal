@@ -52,5 +52,16 @@
   "faq_other_concerns_question_2": "હું પશુઓના આરોગ્યમાં સુધારો કેવી રીતે કરી શકું?",
   "faq_other_concerns_answer_2": "યોગ્ય પોષણ, રસીકરણ, અને સ્વચ્છતા પ્રદાન કરો. પશુ વૈદને સલાહ કરો.",
   "faq_other_concerns_question_3": "કિસાનો માટે આબોહવા પરિવર્તનની પડકારો શું છે?",
-  "faq_other_concerns_answer_3": "તમારા વિસ્તારમાં આબોહવા પરિવર્તનના અસરોને સમજો અને આબોહવા સહનશીલ પ્રથાઓ અપનાવો."
+  "faq_other_concerns_answer_3": "તમારા વિસ્તારમાં આબોહવા પરિવર્તનના અસરોને સમજો અને આબોહવા સહનશીલ પ્રથાઓ અપનાવો.",
+  "crop_prediction_title": "પાકની ભવિષ્યવાણી",
+  "soil_type": "માટીનો પ્રકાર",
+  "enter_soil_type": "માટીનો પ્રકાર દાખલ કરો",
+  "climate_conditions": "હવામાન પરિસ્થિતિઓ",
+  "enter_climate_conditions": "હવામાન પરિસ્થિતિઓ દાખલ કરો",
+  "previous_yield": "ગત ઉપજ (ટનમાં)",
+  "enter_previous_yield": "ગત ઉપજ દાખલ કરો",
+  "submit_button": "સબમિટ",
+  "predicting": "ભવિષ્યવાણી કરી રહી છે...",
+  "prediction_result": "ભવિષ્યવાણી પરિણામ",
+  "recommended_crops": "ભલામણ કરેલા પાક:"
 }

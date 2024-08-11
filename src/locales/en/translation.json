@@ -52,5 +52,16 @@
   "faq_other_concerns_question_2": "How can I improve livestock health?",
   "faq_other_concerns_answer_2": "Provide proper nutrition, vaccination, and hygiene. Consult with a veterinarian.",
   "faq_other_concerns_question_3": "What are the challenges of climate change for farmers?",
-  "faq_other_concerns_answer_3": "Understand the impacts of climate change on your region and adopt climate-resilient practices."
+  "faq_other_concerns_answer_3": "Understand the impacts of climate change on your region and adopt climate-resilient practices.",
+  "crop_prediction_title": "Crop Prediction",
+  "soil_type": "Soil Type",
+  "enter_soil_type": "Enter soil type",
+  "climate_conditions": "Climate Conditions",
+  "enter_climate_conditions": "Enter climate conditions",
+  "previous_yield": "Previous Yield (in tons)",
+  "enter_previous_yield": "Enter previous yield",
+  "submit_button": "Submit",
+  "predicting": "Predicting...",
+  "prediction_result": "Prediction Result",
+  "recommended_crops": "Recommended Crops:"
 }
