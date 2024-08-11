@@ -48,7 +48,7 @@ const Home = () => {
           description="Get expert advice on various farming practices and techniques."
         />
         <Card
-          to="/PlantPlanner"
+          to="/CropPrediction"
           icon={FaSun} // Replaced with a known icon
           title="Plant Planner"
           description="Plan your crops effectively based on weather conditions and soil type."

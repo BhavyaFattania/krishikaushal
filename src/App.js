@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Footer from './components/Footer';
 import FarmerGuide from './pages/FarmerGuide';
+import CropPrediction from './pages/CropPrediction';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/PlantAnalyze" element={<PlantAnalyze />} />
           <Route path="/FarmerGuide" element={<FarmerGuide />} />
+          <Route path="/CropPrediction" element={<CropPrediction />} />
         </Routes>
         <Footer />
       </div>
