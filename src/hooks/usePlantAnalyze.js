@@ -1,13 +1,10 @@
 import { useState } from 'react';
-import axios from 'axios';
-import { translateText } from './translateText';
 
 export const usePlantAnalyze = () => {
   const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
   const [responseData, setResponseData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [language, setLanguage] = useState('en'); // Default language
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -32,28 +29,30 @@ export const usePlantAnalyze = () => {
     formData.append('image', document.querySelector('input[type="file"]').files[0]);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/analyzeImage', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
+      const response = await fetch('http://host1.thunderdevelops.in:25570/api/analyzeImage', {
+        method: 'POST',
+        body: formData,
       });
 
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const result = await response.json();
+
       // Clean the response text
-      const cleanResponseText = response.data.text
+      const cleanResponseText = result.text
         .replace(/^```json\s*|\s*```$/g, '') // Remove backticks and json markers
         .trim();
 
       // Parse the cleaned response text
       const parsedResponse = JSON.parse(cleanResponseText);
 
-      // Translate each field
-      const translatedCrop = await translateText(parsedResponse.crop, language);
-      const translatedDisease = await translateText(parsedResponse.disease, language);
-      const translatedTreatment = await translateText(parsedResponse.treatment, language);
-
       // Set the translated response data
       setResponseData({
-        crop: translatedCrop,
-        disease: translatedDisease,
-        treatment: translatedTreatment,
+        crop: parsedResponse.crop,
+        disease: parsedResponse.disease,
+        treatment: parsedResponse.treatment,
       });
     } catch (err) {
       setError('An error occurred while analyzing the image.');
@@ -70,6 +69,5 @@ export const usePlantAnalyze = () => {
     error,
     handleFileChange,
     handleSubmit,
-    setLanguage, // Expose the function to change language
   };
 };
