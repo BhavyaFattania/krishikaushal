@@ -89,7 +89,7 @@ app.post('/api/analyzeImage', upload.single('image'), async (req, res) => {
     }
 });
 
-// New endpoint for text search
+
 app.post('/api/voiceSearch', async (req, res) => {
     try {
         const { query } = req.body;
@@ -128,6 +128,63 @@ app.post('/api/voiceSearch', async (req, res) => {
         res.status(500).json({ error: 'Text search failed' });
     }
 });
+
+app.post('/api/predictCrop', async (req, res) => {
+    try {
+        const { soilType, climate, previousYield } = req.body;
+
+        if (!soilType || !climate || !previousYield) {
+            return res.status(400).json({ error: 'All fields are required' });
+        }
+
+        // A prompt to generate a prediction
+        const cropPredictionPrompt = `Based on the following farm-specific data, recommend the best crops to maximize yield:\n
+        Soil Type: ${soilType}\n
+        Climate Conditions: ${climate}\n
+        Previous Crop Yield: ${previousYield}\n
+        Provide a list of the best-suited crops. Response should only be in JSON format.\n\n
+        {
+            "crops": ["crop1", "crop2", "crop3"]
+        }`;
+
+        const safetySettings = [
+            { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_NONE' },
+            { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_NONE' },
+            { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_NONE' },
+            { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_NONE' }
+        ];
+
+        const model = genAI.getGenerativeModel({
+            model: 'gemini-1.5-flash',
+            safetySettings
+        });
+
+        const result = await model.generateContent([cropPredictionPrompt]);
+
+        const response = await result.response;
+        let text = await response.text();
+
+        // Log the entire response text for debugging
+        console.log('Raw Response Text:', text);
+
+        // Step 2: Sanitize the Response
+        text = text.replace(/```json/g, '').replace(/```/g, '').trim();
+
+        // Log the sanitized response
+        console.log('Sanitized Response Text:', text);
+
+        // Step 3: Parse the Cleaned JSON Text
+        const jsonResponse = JSON.parse(text);
+
+        res.json(jsonResponse);
+    } catch (error) {
+        console.error('Error during crop prediction:', error.message, error.stack);
+        res.status(500).json({ error: 'Crop prediction failed' });
+    }
+});
+
+
+
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
