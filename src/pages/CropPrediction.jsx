@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import axios from 'axios';
 
 const CropPrediction = () => {
     const { t, i18n } = useTranslation();
@@ -27,8 +26,21 @@ const CropPrediction = () => {
         };
 
         try {
-            const response = await axios.post('http://localhost:5000/api/predictCrop', data);
-            setPrediction(response.data);
+            const URL = 'http://host1.thunderdevelops.in:25570/api/predictCrop';
+            const response = await fetch(URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const result = await response.json();
+            setPrediction(result);
         } catch (err) {
             setError('An error occurred while predicting the crop.');
         } finally {
@@ -67,7 +79,7 @@ const CropPrediction = () => {
                             <p><strong className="font-medium">{t('recommended_crops')}</strong> {prediction.crops.join(', ')}</p>
                         </div>
                     )}
-                    
+
                     <form onSubmit={handleSubmit} className="flex flex-col items-center p-4">
                         <label className="text-gray-700 mb-2">{t('soil_type')}</label>
                         <input
@@ -104,7 +116,6 @@ const CropPrediction = () => {
                             {loading ? t('predicting') : t('submit_button')}
                         </button>
                     </form>
-
                     
                 </div>
             </div>
