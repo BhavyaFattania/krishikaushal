@@ -1,4 +1,5 @@
 # Krishi Kaushal
+# DAIICT Hackout'24 Howler
 ![Webpage preview screenshot](https://github.com/Krish-Panchani/krishikaushal/blob/main/public/Screenshot%202024-08-10%20211105.png?raw=true)
 # Getting Started with Create React App
 
