@@ -29,7 +29,9 @@ export const usePlantAnalyze = () => {
     formData.append('image', document.querySelector('input[type="file"]').files[0]);
 
     try {
-      const response = await fetch('http://localhost:5000/api/analyzeImage', {
+      const URL = process.env.REACT_APP_ANALYZE_IMAGE;
+      console.log("env: " + URL);
+      const response = await fetch(URL, {
         method: 'POST',
         body: formData,
       });
