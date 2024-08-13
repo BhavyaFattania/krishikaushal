@@ -30,7 +30,6 @@ export const usePlantAnalyze = () => {
 
     try {
       const URL = process.env.REACT_APP_ANALYZE_IMAGE;
-      console.log("env: " + URL);
       const response = await fetch(URL, {
         method: 'POST',
         body: formData,

@@ -12,7 +12,6 @@ export const handleSubmit = async (e, soilType, climate, previousYield, setLoadi
 
     try {
         const URL = process.env.REACT_APP_CROP_PREDICATION;
-        console.log("env: " + URL);
         const response = await fetch(URL, {
             method: 'POST',
             headers: {

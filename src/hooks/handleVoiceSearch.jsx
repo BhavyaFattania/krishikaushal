@@ -14,7 +14,6 @@ const HandleVoiceSearch = ({ transcript }) => {
     console.log('Transmitting transcript:', transcript);
     try {
       const URL = process.env.REACT_APP_VOICE_SEARCH;
-      console.log("env: " + URL);
       const response = await axios.post(URL, { query: transcript });
       console.log('API Response:', response.data);
 
