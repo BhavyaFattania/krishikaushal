@@ -1,5 +1,10 @@
 # Krishi Kaushal
 # DAIICT Hackout'24 Howler
+## Team Memebers 
+1. Yash Oza
+2. Bhavya Fattania
+3. Man Gajjar
+4. Krish Panchani
 ![Webpage preview screenshot](https://github.com/Krish-Panchani/krishikaushal/blob/main/public/Screenshot%202024-08-10%20211105.png?raw=true)
 # Getting Started with Create React App
 
